@@ -26,11 +26,11 @@ class GNN(Module):
             self.input_size = hidden_size * 2
         if opt.method =='modif_gru_large':
             self.gate_size = hidden_size
-        elif opt.method =='modif_gru_use_torch' or  opt.method =='modif_gru_use_torch_modif' or opt.method=='new1_mixed_posneg_br_one' or opt.method=='new2_mixed_posneg_br_one' or  opt.method =='modif_rnn_use_torch_modif' or  opt.method =='modif_lstm_use_torch_modif'or  opt.method =='define_gru2' or  opt.method =='define_gru3' or  opt.method[:-1] =='define_gru':
+        elif opt.method =='modif_gru_use_torch' or  opt.method =='modif_gru_use_torch_modif' or opt.method=='new1_mixed_posneg_br_one' or opt.method=='GIISR' or  opt.method =='modif_rnn_use_torch_modif' or  opt.method =='modif_lstm_use_torch_modif'or  opt.method =='define_gru2' or  opt.method =='define_gru3' or  opt.method[:-1] =='define_gru':
             self.gate_size = hidden_size
         else:
             self.gate_size = 3 * hidden_size
-        if opt.method=="define_gru2"  or  opt.method =='define_gru3' or  opt.method[:-1] =='define_gru' or opt.method=='new1_mixed_posneg_br_one' or opt.method=='new2_mixed_posneg_br_one':
+        if opt.method=="define_gru2"  or  opt.method =='define_gru3' or  opt.method[:-1] =='define_gru' or opt.method=='new1_mixed_posneg_br_one' or opt.method=='GIISR':
             self.w_z = Parameter(torch.Tensor(self.gate_size, self.input_size))
             self.w_z2 = Parameter(torch.Tensor(self.gate_size, self.input_size))
             self.w_r = Parameter(torch.Tensor(self.gate_size, self.input_size))
@@ -606,7 +606,7 @@ class GNN(Module):
 
             hy_neg = np.array([1])
             hy = hy_pos
-        if opt.method == 'new2_mixed_posneg_br_one':
+        if opt.method == 'GIISR':
             input_in = torch.matmul(A[:, :, :A.shape[1]], self.linear_edge_in(hidden)) + self.b_iah
             input_out = torch.matmul(A[:, :, A.shape[1]: 2 * A.shape[1]], self.linear_edge_out(hidden)) + self.b_oah
             inputs = torch.cat([input_in, input_out], 2)
