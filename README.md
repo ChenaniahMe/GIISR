@@ -2,7 +2,7 @@
 
 ## About the code of the proposed method GIISR
 
-This is the code for the AAAI 2021 Paper: [Graph Neural Networks with Intra- and
+This is the code for the ICASSP 2021 Paper: [Graph Neural Networks with Intra- and
 Inter-session Information for Session-based Recommendation] . We implemente the proposed method in **Pytorch**.
 
 ####(1) Description of datasets
@@ -129,7 +129,7 @@ hy_pos = hy_matmul_pos.reshape(hy.shape[0], hy.shape[1], hy.shape[2])
 hy_neg = np.array([1])
 hy = hy_pos
 ```
-python main.py --dataset=diginetica --method=new2_mixed_posneg_br_one --batchSize=100 --k=11  --method_net_last=orginal --method_net_last_n1=last_n1_orginal
+python main.py --dataset=diginetica --method=GIISR --batchSize=100 --k=11  --method_net_last=orginal --method_net_last_n1=last_n1_orginal
 
 ####(4) The experiment results
 In the code, the corresponding experiment results can be saved in GIISR/logs/, GIISR/logs_loss, GIISR/logs_time 
